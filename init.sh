@@ -18,7 +18,7 @@ if [ -d  ${HOME_DIR} ]
 
 
     su {{cfg.user}} -c "touch ${HOME_DIR}/tmp{{cfg.user}}/`hostname`proxylist.txt"
-    su {{cfg.user}} -c "touch ${HOME_DIR}/tmp{{cfg.user}}/`hostname`ciphersuite.txt"
+    su {{cfg.user}} -c "touch ${HOME_DIR}/tmp{{cfg.user}}/`hostname`ciphsuite.txt"
 
         
  
