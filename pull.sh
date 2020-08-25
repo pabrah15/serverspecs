@@ -2,7 +2,7 @@
 #set -x
 #Author: Prince Abraham
 
-#The script gathers Server Model,/S/N,CPU Speed,Memory Size, Virtualzation specs and SAR Averages
+#The script gathers Server Model,/S/N,CPU Speed,Memory Size, and Virtualzation specs 
 umask 0002
 ###Begin Variables Section
 MSGFILE="$HOME/message.txt"
