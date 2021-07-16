@@ -223,8 +223,8 @@ function curl_hab_error {
       then export DATETDAY=`date +"%Y-%m-%d"`;
         which nslookup > /someENV/null 2>&1;
         (( $? )) && if [[ $(find /hab/pkgs/core -name nslookup|tail -1) ]]; then PATH="$PATH":$(find /hab/pkgs/core -name nslookup|grep bin|tail -1|rev|cut -f 2- -d '/'|rev);fi; 
-        ls /var/adm/sdcsslog/SISRTEvents*.csv &>/someENV/null && export logdir="/var/adm/sdcsslog"
-        [[ -z "$logdir" ]]  &&  export logdir="/var/log/sdcsslog";  
+        ls somedir/SISRTEvents*.csv &>/someENV/null && export logdir="somedir"
+        [[ -z "$logdir" ]]  &&  export logdir="someotherdir";  
         for i in `somesrvr|tr -s ' '|grep Address|grep -v '#'|grep -v ':53'|cut -d: -f2|sed 's/^ *//g'`;
           do [[ `grep ,D "${logdir}"/SISRTEvents*.csv|grep -i curl|grep root|grep -v grep|grep "$DATETDAY"|grep "$i"|tail -1` ]] && curldcsblock=true;
               if [[ "${curldcsblock}" == "true" ]];then curlblock=false; break;fi;
