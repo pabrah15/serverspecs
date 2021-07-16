@@ -43,7 +43,7 @@ function fixchefbasechannel {
 function updateunixops {
     if echo "${habchannel}"|egrep -i $srvenv >/someENV/null && [[ ! -e /etc/redhat-release ]] ; then
       habupdated=false;
-      loadunixops="hab svc load aos/unixops_admin"
+      loadunixops="hab svc load somehabpkg"
       envinname=false;
       echo  $uxopchannel| grep -i $srvenv >/someENV/null && envinname="true";
       if [[ $srvenv == "someENV" ]] && [[ ! $envinname == "true" ]]; then
@@ -53,11 +53,11 @@ function updateunixops {
         hab svc update $package --channel somecannel --strategy at-once > /someENV/null 2>&1 && habupdated=true;
         [[ $habupdated == "true" ]] || { ${loadunixops} --channel somecannel --strategy at-once --force; (( $? )) && habupdated=true; }
       elif [[ $srvenv == "someENV" ]] && [[ ! $envinname == "true" ]]; then
-        hab svc update aos/unixops_admin --channel somechannel --strategy at-once > /someENV/null 2>&1 && habupdated=true;
+        hab svc update somehabpkg --channel somechannel --strategy at-once > /someENV/null 2>&1 && habupdated=true;
          [[ $habupdated == "true" ]] || { ${loadunixops} --channel somechannel --strategy at-once --force; (( $? )) && habupdated=true; }
       fi;
-      [[ $uxoplower > $bldruxoplower ]] && { hab svc unload aos/unixops_admin ; sleep 5;  installsome pkg uninstall aos/unixops_admin/${uxopver}; \
-                             installsome pkg install aos/unixops_admin/${bldruxopver}; ${loadunixops}/${bldruxopver} --channel ${habchannel} --strategy at-once --force; \
+      [[ $uxoplower > $bldruxoplower ]] && { hab svc unload somehabpkg ; sleep 5;  installsome pkg uninstall somehabpkg/${uxopver}; \
+                             installsome pkg install somehabpkg/${bldruxopver}; ${loadunixops}/${bldruxopver} --channel ${habchannel} --strategy at-once --force; \
                              (( $? )) && habupdated=true; }
     fi;    
      }
